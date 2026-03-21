@@ -1,0 +1,26 @@
+{
+  "image_prompts": [
+    {
+      "id": "img_ugc_lifestyle",
+      "category": "Platform Authenticity",
+      "prompt": "Vertical 9:16 smartphone selfie photo of a Gen-Z creator in their bedroom holding a glowing green skincare serum bottle. The lighting is from an LED ring light. The creator looks genuinely excited. Text overlay at the top left says 'Skin routine check' in a bold, standard sans-serif font."
+    },
+    {
+      "id": "img_product_text",
+      "category": "Text & Product Adherence",
+      "prompt": "Vertical 9:16 lifestyle product shot. A matte black energy drink can resting on a skateboard at a sunlit skatepark. Written clearly and perfectly on the can is the text 'VIBE ZERO'. Floating in the air next to it in bright neon pink typography is the exact phrase 'FUEL YOUR GRIND'."
+    }
+  ],
+  "video_prompts": [
+    {
+      "id": "vid_fast_transition",
+      "category": "Motion & Temporal Consistency",
+      "prompt": "Vertical 9:16 video. Fast-paced TikTok style. Starts with a close-up of a person snapping their fingers. Immediate seamless transition to the same person standing in an entirely different location (a neon-lit Tokyo street at night) wearing a completely different outfit. Smooth motion, no morphing."
+    },
+    {
+      "id": "vid_product_reveal",
+      "category": "Dynamic Reveal",
+      "prompt": "Vertical 9:16 video. A mysterious brown cardboard box sits on a clean kitchen counter. A hand reaches in and pulls out a glowing, futuristic pair of running shoes. The sneakers maintain their complex design details as they are turned around in the light."
+    }
+  ]
+}
