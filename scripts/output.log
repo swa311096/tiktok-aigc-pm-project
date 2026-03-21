@@ -1,0 +1,8 @@
+------------------------------------------------------------
+USER RAW DUMP:
+"I need a 30 second ad for a new skincare app. It should start with a girl looking at herself in the bathroom mirror looking super stressed because of acne. She sighs. Then she pulls out her phone and opens the 'GlowUp' app. She smiles as she taps on the screen. The screen should say 'AI Dermatologist'. Then I want a cool transition where it shows her face healing like magic. Next scene she is outside walking her dog and radiating confidence in the sun. Put a cool upbeat song in the background and end with the text 'Download GlowUp today'."
+------------------------------------------------------------
+Orchestrating raw dump into Symphony prompts... (this takes a few seconds)
+
+ERROR: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+To test this locally: export OPENAI_API_KEY='your-key' && python symphony_orchestrator.py
