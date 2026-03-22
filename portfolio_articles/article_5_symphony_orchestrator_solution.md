@@ -38,8 +38,8 @@ The underlying logic was built by extracting best practices from the official By
 3. **Execution:** These $n$ prompts are fed into TikTok Symphony (Text-to-Video) to generate $n$ separate 5-second video clips.
 4. **Finalization:** Using TikTok Symphony Studio’s native **Remix** tool, the generated clips are uploaded together and mixed into a polished, end-to-end TikTok-ready ad output.
 
-![Remix Finalization Step — Combining Clips into End-to-End Ad](../assets/remix_finalization_step.png)
-*Using TikTok Symphony’s Remix feature to stitch the individual 5-second clips into a complete, coherent ad.*
+<img src="../assets/remix_finalization_step.png" width="33%" alt="Remix Finalization Step">
+<br><em>Using TikTok Symphony’s Remix feature to stitch the individual 5-second clips into a complete, coherent ad.</em>
 
 ---
 
@@ -65,6 +65,9 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 6. *A cozy medium shot of the young woman now comfortably seated on a sofa, wearing the blue sweater. She holds an open book in one hand and takes a large, satisfied bite of a pizza slice with the other. Soft ambient lighting illuminates the scene.*
 
 **The Issue:** Symphony Text-to-Video does not retain generated elements across separate prompts. The "young woman in her late twenties" was rendered as a completely different person in every 5-second clip, leading to massive inconsistency.
+<img src="../assets/iteration1_inconsistent_faces.png" width="50%" alt="Iteration 1 & 2 Output — Inconsistent Character Across Clips">
+<br><em>Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.</em>
+
 
 ---
 
@@ -81,9 +84,6 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 6. *A comfortable wide shot of a modern living room with unpacked boxes in the corner. The young woman who looks exactly like Emma Watson is now relaxed on a plush couch, holding a thick hardcover book in one hand and biting joyfully into a large slice of pizza held in the other. Soft interior lighting highlights her contented expression.*
 
 **The Issue:** The physical face became consistent, but because I didn't heavily enforce the clothing alongside the locked face, the AI lost temporal awareness. The clothing changed randomly, and pushing similar camera angles caused the AI to morph the backgrounds poorly.
-
-<img src="../assets/iteration1_inconsistent_faces.png" width="50%" alt="Iteration 1 & 2 Output — Inconsistent Character Across Clips">
-<br><em>Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.</em>
 
 ---
 
