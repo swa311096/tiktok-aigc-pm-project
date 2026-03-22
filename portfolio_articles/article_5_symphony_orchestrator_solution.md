@@ -34,7 +34,10 @@ The underlying logic was built by extracting best practices from the official By
 1. **Input:** The orchestrator takes the user’s raw, messy ad content draft and their desired total ad duration (e.g., 30 seconds).
 2. **Transformation:** The LLM breaks the raw idea down logically into $n$ number of highly-optimized 5-second prompt blocks.
 3. **Execution:** These $n$ prompts are fed into TikTok Symphony (Text-to-Video) to generate $n$ separate 5-second video clips.
-4. **Finalization:** Using TikTok Symphony Studio’s native tools (Remix, Dub, Video Editor), the clips are stitched together into a polished, end-to-end ad output.
+4. **Finalization:** Using TikTok Symphony Studio’s native **Remix** tool, the generated clips are uploaded together and mixed into a polished, end-to-end TikTok-ready ad output.
+
+![Remix Finalization Step — Combining Clips into End-to-End Ad](../assets/remix_finalization_step.png)
+*Using TikTok Symphony’s Remix feature to stitch the individual 5-second clips into a complete, coherent ad.*
 
 ---
 
@@ -61,8 +64,8 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** Symphony Text-to-Video does not retain generated elements across separate prompts. The "young woman in her late twenties" was rendered as a completely different person in every 5-second clip, leading to massive inconsistency.
 
-![Placeholder - Iteration 1 Output (Inconsistent Character)](/path/to/your/image1.png)
-*(Note: Insert visual evidence of the character changing faces here)*
+![Iteration 1 Output — Inconsistent Character Across Clips](../assets/iteration1_inconsistent_faces.png)
+*The same "young woman" prompt rendered as completely different people across each 5-second clip in TikTok Symphony.*
 
 ---
 
@@ -101,8 +104,8 @@ To achieve true temporal consistency, I explicitly isolated character clothing a
 5. *A medium shot capturing the young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, accepting a very large, steaming cardboard pizza box from an unseen delivery person. Her face shows relief and a slight smile.*
 6. *A shallow depth of field close-up shot of the young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, sitting comfortably on a modern couch. She takes a large, satisfying bite of a cheese pizza slice while holding an open paperback book in the other hand. The lighting is warm and cozy.*
 
-![Placeholder - Iteration 3 Final Output (Fully Consistent Clips)](/path/to/your/image3.png)
-*(Note: Insert final, consistent stitched video output/screenshots here)*
+![Iteration 3 Final Output — Consistent Character & Clothing Across Clips](../assets/iteration3_consistent_output.png)
+*With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.*
 
 ---
 
