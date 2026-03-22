@@ -1,21 +1,24 @@
 # Improving TikTok Symphony with LLM Orchestrator
 
-
 ## TL;DR
+
 **Symphony Creative Studio** is TikTok’s answer to leveraging AI to democratize the ad creation process, enabling users to easily build TikTok-native ads. However, the current user experience has friction points: 
+
 1. Generation is limited to only 5-second output videos.
 2. Users face a steep learning curve in understanding how to write the right, consistent prompts.
-3. Stitching 5-second mini-clips together to form a coherent ad is difficult. 
+3. Stitching 5-second mini-clips together to form a coherent ad is difficult.
 
 To solve this, I built an LLM-powered orchestration wrapper (trained on the Bytedance prompt guide) that transforms raw user input into a sequence of actionable 5-second prompts. These prompts can be plugged directly into Symphony to generate a complete end-to-end video ad using text-to-video, remix, and dub solutions. By enforcing strict character and temporal consistency rules, this solution significantly reduces user friction and drives platform adoption, aligning with the long-term goal of inclusive AI-driven solutions.
 
-<video src="assets/final-output.mp4" width="100%" controls autoplay loop muted></video>
-<em>The final end-to-end stitched TikTok ad, produced using the Symphony Orchestrator pipeline.</em>
+  
+*Full video available in the repo under `assets/final-output.mp4`.*
 
 ---
 
 ## 1. Context & The Core Problem
+
 The overarching goal of **Symphony Creative Studio** is to make TikTok ad creation universally accessible through AI. But the reality of the current user experience introduced several pain points:
+
 1. **The 5-Second Limit:** Current models only output 5-second video chunks.
 2. **The Prompting Education Gap:** Users don't know how to write the highly specific visual prompts required to get good results.
 3. **The Cohesion Challenge:** Taking disjointed 5-second clips and forming a single coherent, logical advertisement is daunting.
@@ -25,38 +28,44 @@ Even with ByteDance's official prompt guides, there is an underlying expectation
 **The Insight:** No matter how novel the technology is, a steep learning curve deters adoption. I experienced this firsthand during my summer internship at AWS, where startups would avoid AWS entirely because the initial learning curve was too steep. The Symphony UX felt like a very similar friction problem.
 
 ## 2. The Solution: An LLM-Powered Orchestrator
+
 To solve this, I decided to build an **LLM-powered orchestrated wrapper**. [The open-source code is available on my GitHub repository](#), where the core logic is driven by a rule-based python script (`scripts/symphony_orchestrator.py`). The workflow is simple: users choose their preferred LLM platform (in my case, I chose Gemini), enter their API key directly into the UI along with their raw ad idea, and instantly receive a perfectly structured list of 5-second generative prompts.
 
-![Symphony Orchestrator Prompt Generator Demo](../assets/symphony_orchestrator_demo.webp)
+Symphony Orchestrator Prompt Generator Demo
 *Demo of the Orchestrator turning a raw idea into sequential Symphony-optimized prompts.* 
 
 The underlying logic was built by extracting best practices from the official ByteDance prompt guidelines, and iteratively enforcing new rules to handle prominent edge cases (like character morphing and clothing inconsistency).
 
 ### End-to-End User Flow
+
 1. **Input:** The orchestrator takes the user’s raw, messy ad content draft and their desired total ad duration (e.g., 30 seconds).
 2. **Transformation:** The LLM breaks the raw idea down logically into $n$ number of highly-optimized 5-second prompt blocks.
 3. **Execution:** These $n$ prompts are fed into TikTok Symphony (Text-to-Video) to generate $n$ separate 5-second video clips.
 4. **Finalization:** Using TikTok Symphony Studio’s native **Remix** tool, the generated clips are uploaded together and mixed into a polished, end-to-end TikTok-ready ad output.
 
-<img src="../assets/remix_finalization_step.png" width="33%" alt="Remix Finalization Step">
-<br><em>Using TikTok Symphony’s Remix feature to stitch the individual 5-second clips into a complete, coherent ad.</em>
+  
+*Using TikTok Symphony’s Remix feature to stitch the individual 5-second clips into a complete, coherent ad.*
 
 ---
 
 ## 3. Iterative Development & Engineering the Rules
 
 ### The Initial Rule Set
+
 To transform a raw prompt into Symphony-ready lines, I established these base constraints:
+
 1. **AVOID CONVERSATIONAL PROMPTS:** Directly state what happens. (No "Please create...").
-2. **NO GENERATIVE TEXT, LOGOS, OR BRAND NAMES:** AIGC models struggle with spelling. Instead of writing "FitPro," say "a colorful fitness app icon." 
+2. **NO GENERATIVE TEXT, LOGOS, OR BRAND NAMES:** AIGC models struggle with spelling. Instead of writing "FitPro," say "a colorful fitness app icon."
 3. **VISUALS ONLY (NO AUDIO):** Describe visuals only. No voiceovers or music in the prompt.
 4. **DESCRIBE SCENE, NOT SCRIPT:** Focus purely on visual action.
 5. **SINGLE SCENE PER PROMPT:** No multiple transitions within one 5-second block.
 
 ### Iteration 1: The Raw Test
+
 **Input:** *I need a 30-second ad for a new food delivery app called 'QuickBite'. The ad starts with a tired woman in her late 20s wearing a blue fluffy sweater, sitting on her living room floor surrounded by cardboard moving boxes. She looks super exhausted and hungry. Then she picks up her phone and opens the app... The doorbell rings and she opens the door to hold a huge hot pizza box. End the video with her sitting on the couch happily eating a slice of pizza.*
 
 **The Resulting Output Prompts:**
+
 1. *A low-angle, wide shot of a young woman in her late twenties, wearing a blue fluffy sweater, sitting defeatedly on the floor of an empty room surrounded by stacked, messy cardboard moving boxes. Warm, dim lighting suggests evening. Camera slowly zooms in on her exhausted facial expression.*
 2. *A tight close-up shot focusing only on the hands of the young woman in the blue sweater. Her fingers slowly reach for a glowing smartphone lying near a crumpled piece of packing paper. The background is blurred.*
 3. *An extreme close-up on the smartphone screen, showing a bright, modern delivery app interface displaying various food icons. The woman's thumb decisively taps a large confirmation button near the bottom of the screen. The screen glows brightly.*
@@ -66,17 +75,18 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** Symphony Text-to-Video does not retain generated elements across separate prompts. The "young woman in her late twenties" was rendered as a completely different person in every 5-second clip, leading to massive inconsistency.
 
-
-<img src="../assets/iteration1_inconsistent_faces.png" width="50%" alt="Iteration 1 & 2 Output — Inconsistent Character Across Clips">
-<br><em>Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.</em>
+  
+*Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.*
 
 ---
 
 ### Iteration 2: Fixing Character Awareness
+
 **Opportunity:** Retain the character's facial elements across the sequential prompts. 
 **Fix:** To prevent the AI from generating random faces, I added a rule to lock a reference name. I injected `"a young woman who looks exactly like Emma Watson"` into every prompt.
 
 **The Resulting Output Prompts:**
+
 1. *A medium low-angle shot of a young woman who looks exactly like Emma Watson, wearing a bright blue fluffy sweater, sitting defeatedly on a hardwood floor surrounded by stacked, open cardboard moving boxes. Warm afternoon light streams from a window behind her. The camera slowly zooms in on her tired face.*
 2. *An extreme close-up, high-angle shot looking directly down onto the hands of the young woman who looks exactly like Emma Watson. Her fingers hesitantly swipe across a smartphone screen displaying a vibrant, clean interface for a food delivery application.*
 3. *A tight close-up shot focusing only on the smartphone screen held by the young woman who looks exactly like Emma Watson. Her thumb taps a large, glowing button on the screen. A subtle, brief animation of food items quickly spinning appears on the screen before the shot cuts.*
@@ -86,20 +96,23 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** The physical face became consistent, but because I didn't heavily enforce the clothing alongside the locked face, the AI lost temporal awareness. The clothing changed randomly, and pushing similar camera angles caused the AI to morph the backgrounds poorly.
 
-<img src="assets/iteration2.png" width="50%" alt="Iteration 2 Output — Consistent Face, Inconsistent Clothing/Morphing">
-<br><em>Iteration 2 results: Face consistency was achieved by using lookalike prompts, but clothing and backgrounds still varied significantly between clips.</em>
+  
+*Iteration 2 results: Face consistency was achieved by using lookalike prompts, but clothing and backgrounds still varied significantly between clips.*
 
 ---
 
 ### Iteration 3: The Final Polish (Clothing Lock & Anti-Morphing)
+
 To achieve true temporal consistency, I explicitly isolated character clothing and MECE (Mutually Exclusive, Collectively Exhaustive) scene elements to strictly prevent hallucinations.
 
 **New Enforced Rules:**
+
 > **6. CELEBRITY AND CLOTHING LOCK:** Generative video AI has zero memory between clips. To force perfect facial and outfit consistency, pick a celebrity lookalike AND a specific outfit. You MUST paste this exact combined description into EVERY single prompt.
-> 
+>
 > **7. SHOT VARIETY (ANTI-MORPHING):** Reusing the exact same camera angle across scenes causes noticeable AI morphing of props. To hide this without breaking the story's location, drastically change the CAMERA ANGLE or SHOT TYPE per clip (Wide Shot -> Extreme Close-Up -> Over-the-shoulder).
 
 **The Winning Output Sequence:**
+
 1. *An extreme wide shot of a young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, sitting on the dusty wooden floor surrounded by stacks of brown cardboard moving boxes in a dimly lit apartment. Camera slowly zooms in on her face showing exhaustion.*
 2. *An over-the-shoulder shot behind the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, as she lifts a smartphone from the floor. The screen displays a colorful food ordering interface icon, not text.*
 3. *An extreme close-up shot focusing only on the young woman's fingers who looks exactly like Emma Watson wearing a blue fluffy sweater, tapping a single large button on the phone screen interface. Her eyes widen slightly in anticipation.*
@@ -107,12 +120,13 @@ To achieve true temporal consistency, I explicitly isolated character clothing a
 5. *A medium shot capturing the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, accepting a very large, steaming cardboard pizza box from an unseen delivery person. Her face shows relief and a slight smile.*
 6. *A shallow depth of field close-up shot of the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, sitting comfortably on a modern couch. She takes a large, satisfying bite of a cheese pizza slice while holding an open paperback book in the other hand. The lighting is warm and cozy.*
 
-<img src="../assets/iteration3_consistent_output.png" width="100%" alt="Iteration 3 Final Output — Consistent Character & Clothing Across Clips">
-<br><em>With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.</em>
+  
+*With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.*
 
 ---
 
 ## 4. Product Trade-offs
+
 To build an effective product workflow, I had to balance technological constraints with a seamless user experience. This required accepting the following trade-offs:
 
 1. **Automation vs. Hyper-Specific Creative Control:** By automatically locking characters and changing shot types to avoid morphing, the Orchestrator dictates some creative decisions (like camera angles) on behalf of the user. **Why it's acceptable:** For SMBs lacking creative resources, generating a cohesive video quickly provides significantly more value than total creative control resulting in a jarring, inconsistent video.
@@ -121,6 +135,7 @@ To build an effective product workflow, I had to balance technological constrain
 ---
 
 ## 5. Success Metrics (KPIs)
+
 If this Orchestrator were integrated directly into the Symphony Creative Studio, I would track its success and business impact through the following metrics:
 
 1. **Adoption Rate (Core Metric):** The percentage of advertisers who initiate the workflow and publish a final stitched ad vs. abandonment rate, indicating the Orchestrator effectively reduced friction.
