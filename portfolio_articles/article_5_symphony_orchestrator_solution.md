@@ -31,8 +31,8 @@ Even with ByteDance's official prompt guides, there is an underlying expectation
 
 To solve this, I decided to build an **LLM-powered orchestrated wrapper**. [The open-source code is available on my GitHub repository](#), where the core logic is driven by a rule-based python script (`scripts/symphony_orchestrator.py`). The workflow is simple: users choose their preferred LLM platform (in my case, I chose Gemini), enter their API key directly into the UI along with their raw ad idea, and instantly receive a perfectly structured list of 5-second generative prompts.
 
-Symphony Orchestrator Prompt Generator Demo
-*Demo of the Orchestrator turning a raw idea into sequential Symphony-optimized prompts.* 
+![Symphony Orchestrator Prompt Generator Demo](../assets/symphony_orchestrator_demo.webp)
+*Demo of the Orchestrator turning a raw idea into sequential Symphony-optimized prompts.*
 
 The underlying logic was built by extracting best practices from the official ByteDance prompt guidelines, and iteratively enforcing new rules to handle prominent edge cases (like character morphing and clothing inconsistency).
 
@@ -43,8 +43,8 @@ The underlying logic was built by extracting best practices from the official By
 3. **Execution:** These $n$ prompts are fed into TikTok Symphony (Text-to-Video) to generate $n$ separate 5-second video clips.
 4. **Finalization:** Using TikTok Symphony Studio’s native **Remix** tool, the generated clips are uploaded together and mixed into a polished, end-to-end TikTok-ready ad output.
 
-  
-*Using TikTok Symphony’s Remix feature to stitch the individual 5-second clips into a complete, coherent ad.*
+<img src="../assets/remix_finalization_step.png" width="33%" alt="Remix Finalization Step">
+<br><em>Using TikTok Symphony’s Remix feature to stitch the individual 5-second clips into a complete, coherent ad.</em>
 
 ---
 
@@ -75,8 +75,8 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** Symphony Text-to-Video does not retain generated elements across separate prompts. The "young woman in her late twenties" was rendered as a completely different person in every 5-second clip, leading to massive inconsistency.
 
-  
-*Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.*
+<img src="../assets/iteration1_inconsistent_faces.png" width="50%" alt="Iteration 1 & 2 Output — Inconsistent Character Across Clips">
+<br><em>Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.</em>
 
 ---
 
@@ -96,8 +96,8 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** The physical face became consistent, but because I didn't heavily enforce the clothing alongside the locked face, the AI lost temporal awareness. The clothing changed randomly, and pushing similar camera angles caused the AI to morph the backgrounds poorly.
 
-  
-*Iteration 2 results: Face consistency was achieved by using lookalike prompts, but clothing and backgrounds still varied significantly between clips.*
+<img src="../assets/iteration2.png" width="50%" alt="Iteration 2 Output — Consistent Face, Inconsistent Clothing/Morphing">
+<br><em>Iteration 2 results: Face consistency was achieved by using lookalike prompts, but clothing and backgrounds still varied significantly between clips.</em>
 
 ---
 
@@ -120,8 +120,8 @@ To achieve true temporal consistency, I explicitly isolated character clothing a
 5. *A medium shot capturing the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, accepting a very large, steaming cardboard pizza box from an unseen delivery person. Her face shows relief and a slight smile.*
 6. *A shallow depth of field close-up shot of the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, sitting comfortably on a modern couch. She takes a large, satisfying bite of a cheese pizza slice while holding an open paperback book in the other hand. The lighting is warm and cozy.*
 
-  
-*With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.*
+<img src="../assets/iteration3_consistent_output.png" width="100%" alt="Iteration 3 Final Output — Consistent Character & Clothing Across Clips">
+<br><em>With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.</em>
 
 ---
 
