@@ -85,6 +85,9 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** The physical face became consistent, but because I didn't heavily enforce the clothing alongside the locked face, the AI lost temporal awareness. The clothing changed randomly, and pushing similar camera angles caused the AI to morph the backgrounds poorly.
 
+<img src="../assets/iteration2.png" width="50%" alt="Iteration 2 Output — Consistent Face, Inconsistent Clothing/Morphing">
+<br><em>Iteration 2 results: Face consistency was achieved by using lookalike prompts, but clothing and backgrounds still varied significantly between clips.</em>
+
 ---
 
 ### Iteration 3: The Final Polish (Clothing Lock & Anti-Morphing)
