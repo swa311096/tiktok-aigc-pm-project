@@ -123,6 +123,9 @@ If this Orchestrator were integrated directly into the Symphony Creative Studio,
 ---
 
 ## 6. Results & Future Vision
+![Final Output Video](../assets/final-output.mp4)
+*The complete end-to-end stitched TikTok ad — generated using the Symphony Orchestrator pipeline.*
+
 The final orchestrated output is remarkably consistent. While the face rendering varies slightly under close scrutiny, the strictly unified clothing and shot variety make differences unnoticeable to the average viewer. Pushing these outputs through Remix, Dub, and the Video Editor results in a highly cohesive ad. 
 
 **The Future Integration:**
