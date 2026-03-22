@@ -1,11 +1,10 @@
-# Building the Symphony Orchestrator: Democratizing AI Ad Creation on TikTok
+# Improving TikTok Symphony with LLM Orchestrator
 
-*Author: Product Manager | Focus: AI Video Generation & Ad Tech*
 
 ## TL;DR
 **Symphony Creative Studio** is TikTok’s answer to leveraging AI to democratize the ad creation process, enabling users to easily build TikTok-native ads. However, the current user experience has friction points: 
 1. Generation is limited to only 5-second output videos.
-2. Users face a steep learning curve in prompt engineering to generate those clips.
+2. Users face a steep learning curve in understanding how to write the right, consistent prompts.
 3. Stitching 5-second mini-clips together to form a coherent ad is difficult. 
 
 To solve this, I built an LLM-powered orchestration wrapper (trained on the Bytedance prompt guide) that transforms raw user input into a sequence of actionable 5-second prompts. These prompts can be plugged directly into Symphony to generate a complete end-to-end video ad using text-to-video, remix, and dub solutions. By enforcing strict character and temporal consistency rules, this solution significantly reduces user friction and drives platform adoption, aligning with the long-term goal of inclusive AI-driven solutions.
@@ -20,7 +19,7 @@ The overarching goal of **Symphony Creative Studio** is to make TikTok ad creati
 
 Even with ByteDance's official prompt guides, there is an underlying expectation that users will invest time to learn prompt engineering, manually break down their complete ad into logical pieces, and painstakingly write prompts for each scene. 
 
-**The Insight:** No matter how novel the technology is, a steep learning curve deters adoption. I experienced this firsthand monitoring AWS adoption—startups would completely avoid AWS simply because the initial learning curve was too steep. The Symphony UX felt like a very similar friction problem.
+**The Insight:** No matter how novel the technology is, a steep learning curve deters adoption. I experienced this firsthand during my summer internship at AWS, where startups would avoid AWS entirely because the initial learning curve was too steep. The Symphony UX felt like a very similar friction problem.
 
 ## 2. The Solution: An LLM-Powered Orchestrator
 To solve this, I decided to build an **LLM-powered orchestrated wrapper**. [The open-source code is available on my GitHub repository](#), where the core logic is driven by a rule-based python script (`scripts/symphony_orchestrator.py`). The workflow is simple: users choose their preferred LLM platform (in my case, I chose Gemini), enter their API key directly into the UI along with their raw ad idea, and instantly receive a perfectly structured list of 5-second generative prompts.
@@ -64,9 +63,6 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** Symphony Text-to-Video does not retain generated elements across separate prompts. The "young woman in her late twenties" was rendered as a completely different person in every 5-second clip, leading to massive inconsistency.
 
-![Iteration 1 Output — Inconsistent Character Across Clips](../assets/iteration1_inconsistent_faces.png)
-*The same "young woman" prompt rendered as completely different people across each 5-second clip in TikTok Symphony.*
-
 ---
 
 ### Iteration 2: Fixing Character Awareness
@@ -83,8 +79,8 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** The physical face became consistent, but because I didn't heavily enforce the clothing alongside the locked face, the AI lost temporal awareness. The clothing changed randomly, and pushing similar camera angles caused the AI to morph the backgrounds poorly.
 
-![Placeholder - Iteration 2 Output (Consistent Face, Inconsistent Clothing/Morphing)](/path/to/your/image2.png)
-*(Note: Insert visual evidence proving face consistency but showing clothing/prop morphing)*
+![Iteration 1 & 2 Output — Inconsistent Character Across Clips](../assets/iteration1_inconsistent_faces.png)
+*Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.*
 
 ---
 
