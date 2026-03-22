@@ -9,15 +9,15 @@
 
 To solve this, I built an LLM-powered orchestration wrapper (trained on the Bytedance prompt guide) that transforms raw user input into a sequence of actionable 5-second prompts. These prompts can be plugged directly into Symphony to generate a complete end-to-end video ad using text-to-video, remix, and dub solutions. By enforcing strict character and temporal consistency rules, this solution significantly reduces user friction and drives platform adoption, aligning with the long-term goal of inclusive AI-driven solutions.
 
-![Final Output — TikTok Symphony Orchestrated Ad](../assets/final-output.mp4)
-*The final end-to-end stitched TikTok ad, produced using the Symphony Orchestrator pipeline.*
+<video src="assets/final-output.mp4" width="100%" controls autoplay loop muted></video>
+<em>The final end-to-end stitched TikTok ad, produced using the Symphony Orchestrator pipeline.</em>
 
 ---
 
 ## 1. Context & The Core Problem
 The overarching goal of **Symphony Creative Studio** is to make TikTok ad creation universally accessible through AI. But the reality of the current user experience introduced several pain points:
 1. **The 5-Second Limit:** Current models only output 5-second video chunks.
-2. **The Prompting Education Gap:** Users don't natively know how to write the highly specific visual prompts required to get good results.
+2. **The Prompting Education Gap:** Users don't know how to write the highly specific visual prompts required to get good results.
 3. **The Cohesion Challenge:** Taking disjointed 5-second clips and forming a single coherent, logical advertisement is daunting.
 
 Even with ByteDance's official prompt guides, there is an underlying expectation that users will invest time to learn prompt engineering, manually break down their complete ad into logical pieces, and painstakingly write prompts for each scene. 
@@ -65,9 +65,10 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 6. *A cozy medium shot of the young woman now comfortably seated on a sofa, wearing the blue sweater. She holds an open book in one hand and takes a large, satisfied bite of a pizza slice with the other. Soft ambient lighting illuminates the scene.*
 
 **The Issue:** Symphony Text-to-Video does not retain generated elements across separate prompts. The "young woman in her late twenties" was rendered as a completely different person in every 5-second clip, leading to massive inconsistency.
+
+
 <img src="../assets/iteration1_inconsistent_faces.png" width="50%" alt="Iteration 1 & 2 Output — Inconsistent Character Across Clips">
 <br><em>Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.</em>
-
 
 ---
 
@@ -85,7 +86,7 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** The physical face became consistent, but because I didn't heavily enforce the clothing alongside the locked face, the AI lost temporal awareness. The clothing changed randomly, and pushing similar camera angles caused the AI to morph the backgrounds poorly.
 
-<img src="../assets/iteration2.png" width="50%" alt="Iteration 2 Output — Consistent Face, Inconsistent Clothing/Morphing">
+<img src="assets/iteration2.png" width="50%" alt="Iteration 2 Output — Consistent Face, Inconsistent Clothing/Morphing">
 <br><em>Iteration 2 results: Face consistency was achieved by using lookalike prompts, but clothing and backgrounds still varied significantly between clips.</em>
 
 ---
@@ -99,14 +100,14 @@ To achieve true temporal consistency, I explicitly isolated character clothing a
 > **7. SHOT VARIETY (ANTI-MORPHING):** Reusing the exact same camera angle across scenes causes noticeable AI morphing of props. To hide this without breaking the story's location, drastically change the CAMERA ANGLE or SHOT TYPE per clip (Wide Shot -> Extreme Close-Up -> Over-the-shoulder).
 
 **The Winning Output Sequence:**
-1. *An extreme wide shot of a young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, sitting on the dusty wooden floor surrounded by stacks of brown cardboard moving boxes in a dimly lit apartment. Camera slowly zooms in on her face showing exhaustion.*
-2. *An over-the-shoulder shot behind the young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, as she lifts a smartphone from the floor. The screen displays a colorful food ordering interface icon, not text.*
-3. *An extreme close-up shot focusing only on the young woman's fingers who looks exactly like Emma Stone wearing a blue fluffy sweater, tapping a single large button on the phone screen interface. Her eyes widen slightly in anticipation.*
+1. *An extreme wide shot of a young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, sitting on the dusty wooden floor surrounded by stacks of brown cardboard moving boxes in a dimly lit apartment. Camera slowly zooms in on her face showing exhaustion.*
+2. *An over-the-shoulder shot behind the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, as she lifts a smartphone from the floor. The screen displays a colorful food ordering interface icon, not text.*
+3. *An extreme close-up shot focusing only on the young woman's fingers who looks exactly like Emma Watson wearing a blue fluffy sweater, tapping a single large button on the phone screen interface. Her eyes widen slightly in anticipation.*
 4. *A low-angle shot looking up at a modern wooden front door. A hand wearing a black delivery uniform sleeve briefly knocks, then a doorbell rings. The door handle begins to turn from the outside.*
-5. *A medium shot capturing the young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, accepting a very large, steaming cardboard pizza box from an unseen delivery person. Her face shows relief and a slight smile.*
-6. *A shallow depth of field close-up shot of the young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, sitting comfortably on a modern couch. She takes a large, satisfying bite of a cheese pizza slice while holding an open paperback book in the other hand. The lighting is warm and cozy.*
+5. *A medium shot capturing the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, accepting a very large, steaming cardboard pizza box from an unseen delivery person. Her face shows relief and a slight smile.*
+6. *A shallow depth of field close-up shot of the young woman who looks exactly like Emma Watson wearing a blue fluffy sweater, sitting comfortably on a modern couch. She takes a large, satisfying bite of a cheese pizza slice while holding an open paperback book in the other hand. The lighting is warm and cozy.*
 
-<img src="../assets/iteration3_consistent_output.png" width="50%" alt="Iteration 3 Final Output — Consistent Character & Clothing Across Clips">
+<img src="../assets/iteration3_consistent_output.png" width="100%" alt="Iteration 3 Final Output — Consistent Character & Clothing Across Clips">
 <br><em>With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.</em>
 
 ---
@@ -129,8 +130,6 @@ If this Orchestrator were integrated directly into the Symphony Creative Studio,
 ---
 
 ## 6. Results & Future Vision
-![Final Output Video](../assets/final-output.mp4)
-*The complete end-to-end stitched TikTok ad — generated using the Symphony Orchestrator pipeline.*
 
 The final orchestrated output is remarkably consistent. While the face rendering varies slightly under close scrutiny, the strictly unified clothing and shot variety make differences unnoticeable to the average viewer. Pushing these outputs through Remix, Dub, and the Video Editor results in a highly cohesive ad. 
 
