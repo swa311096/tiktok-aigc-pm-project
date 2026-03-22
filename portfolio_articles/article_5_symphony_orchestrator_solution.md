@@ -82,8 +82,8 @@ To transform a raw prompt into Symphony-ready lines, I established these base co
 
 **The Issue:** The physical face became consistent, but because I didn't heavily enforce the clothing alongside the locked face, the AI lost temporal awareness. The clothing changed randomly, and pushing similar camera angles caused the AI to morph the backgrounds poorly.
 
-![Iteration 1 & 2 Output — Inconsistent Character Across Clips](../assets/iteration1_inconsistent_faces.png)
-*Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.*
+<img src="../assets/iteration1_inconsistent_faces.png" width="50%" alt="Iteration 1 & 2 Output — Inconsistent Character Across Clips">
+<br><em>Even with face-locking attempts, the same character prompt rendered as completely different people across each 5-second clip in TikTok Symphony.</em>
 
 ---
 
@@ -103,8 +103,8 @@ To achieve true temporal consistency, I explicitly isolated character clothing a
 5. *A medium shot capturing the young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, accepting a very large, steaming cardboard pizza box from an unseen delivery person. Her face shows relief and a slight smile.*
 6. *A shallow depth of field close-up shot of the young woman who looks exactly like Emma Stone wearing a blue fluffy sweater, sitting comfortably on a modern couch. She takes a large, satisfying bite of a cheese pizza slice while holding an open paperback book in the other hand. The lighting is warm and cozy.*
 
-![Iteration 3 Final Output — Consistent Character & Clothing Across Clips](../assets/iteration3_consistent_output.png)
-*With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.*
+<img src="../assets/iteration3_consistent_output.png" width="50%" alt="Iteration 3 Final Output — Consistent Character & Clothing Across Clips">
+<br><em>With Celebrity + Clothing Lock and Shot Variety enforced, the same character appears coherently across all 5-second clips.</em>
 
 ---
 
