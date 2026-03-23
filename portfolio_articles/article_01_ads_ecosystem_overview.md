@@ -1,15 +1,10 @@
-# TikTok Ads Ecosystem: From Awareness to Conversion
+# TikTok Ads Ecosystem Overview
 
 ## Objective
-**Give brands better business outcomes — from awareness through to purchase — by combining creative content with AI-powered targeting and measurement.** The team's mandate is to build full-funnel marketing solutions that drive measurable outcomes at scale.
 
-> **Scope note:** This analysis focuses on the paid ads ecosystem. Creator collaborations (TikTok Creator Marketplace, Spark Ads via organic posts) are a meaningful adjacent surface and will be addressed separately.
+TikTok Ads' primary goal is to maximize advertiser outcomes while sustaining long-term platform growth. To do this, the platform optimizes across three core areas: **creation**, **distribution**, and **measurement**.
 
----
-
-## 1. The Full-Funnel Framework
-
-TikTok's ads platform is built around three primary objectives that map directly to the classic marketing funnel:
+Brands have three primary objectives on TikTok:
 
 | Objective | Goal |
 |---|---|
@@ -17,11 +12,13 @@ TikTok's ads platform is built around three primary objectives that map directly
 | **Consideration** | Get people to think about your business and seek more information. |
 | **Conversion** | Encourage people to perform an action, such as buying your product or installing your app. |
 
-Unlike Google Search (where users already have intent) or Meta (where interest signals drive targeting), TikTok's native format is **entertainment-first**. Users are not actively searching for ads — which means the creative itself must do the work of generating demand, not just capturing it. This is what makes the **creative layer disproportionately important** on TikTok relative to other platforms.
+What makes TikTok meaningfully different from other platforms: unlike Google Search (where users already have intent) or Meta (where interest signals drive targeting), TikTok is **entertainment-first**. Users are not actively searching for ads — which means the creative itself must generate demand, not just capture it. This makes the **creative layer disproportionately important** on TikTok relative to other ad platforms.
+
+> **Article scope:** This article provides an overview of the ecosystem and goes deeper on the creation pillar — specifically how existing Symphony tools map to advertiser creative needs. Distribution and measurement are covered at a surface level. Creator collaborations (TikTok Creator Marketplace, Spark Ads) are a meaningful adjacent surface and will be addressed separately.
 
 ---
 
-## 2. How TikTok Structures the Ads Surface
+## 1. How TikTok Structures the Ads Surface
 
 TikTok's Ads Manager organizes its UI across distinct categories — Ad Creation, Ad Formats, Ad Objectives, Ad Optimization, Measurement, and Billing.
 
@@ -38,7 +35,7 @@ This 3-pillar framework more closely mirrors how an advertiser or PM thinks abou
 
 ---
 
-## 3. Pillar 1 — Ads Creation
+## 2. Pillar 1 — Ads Creation
 
 Ads creation covers two distinct workstreams: building the **creative assets** themselves, and structuring them into the right **campaign and ad group hierarchy**.
 
@@ -50,12 +47,16 @@ The creative production workflow breaks down into:
 
 | Use Case | What it requires | Existing TikTok Solution |
 |---|---|---|
-| Script / concept generation | Turning a raw idea into a structured ad brief | Symphony AI Script Generator |
-| Video generation (0-to-1) | Text or image → video | Symphony Text-to-Video / Image-to-Video |
-| Talent / spokesperson | On-screen presenter without real talent costs | Symphony Digital Avatars |
-| Voiceover & translation | Audio narration + multilingual reach | Symphony AI Dubbing / Voice Clone |
-| Post-production editing | Trimming, subtitles, text overlays | Symphony Video Editor |
-| Ad variations | Multiple creative variants per campaign | Symphony Variations |
+| Script / concept generation | Turning a raw ad idea into a structured, scene-by-scene brief | Symphony Creative Assistant (AI Script Generator) |
+| Video generation — text to video | Generating video from a descriptive text prompt | Symphony Text-to-Video (Seedance 1.5) |
+| Video generation — image to video | Animating a static product or lifestyle image into a video | Symphony Image-to-Video (Seedance 1.5) |
+| Image / static ad creation | High-fidelity product or lifestyle images for static placements | Symphony Image Generation (Nano Banana / Flux Kontext Max) |
+| Talent / spokesperson | On-screen presenter without real talent costs | Symphony Digital Avatars (Stock + Custom) |
+| Voiceover | AI-generated narration synced to the video | Symphony AI Voice |
+| Translation & dubbing | Localizing the ad into other languages | Symphony AI Dubbing |
+| Post-production editing | Trimming, subtitles, music, text overlays | Symphony Video Editor |
+| Auto-editing | Automatically assembling footage into a TikTok-native format | Symphony Smart Video |
+| Ad variations | Generating multiple creative variants from a single source asset | Symphony Variations + Smart Creative |
 
 ### B. Campaign & Ad Group Structure
 
@@ -69,7 +70,7 @@ Beyond creative, ads must be organized into TikTok's three-tier hierarchy:
 
 ---
 
-## 4. Pillar 2 — Ads Distribution
+## 3. Pillar 2 — Ads Distribution
 
 Once the creative is ready and the campaign is structured, distribution determines who sees it, how often, and at what cost.
 
@@ -98,7 +99,7 @@ TikTok's targeting stack is comparable to Meta's, covering:
 
 ---
 
-## 5. Pillar 3 — Ads Analytics
+## 4. Pillar 3 — Ads Analytics
 
 Analytics closes the loop — allowing advertisers to measure performance, iterate on creative, and prove ROI.
 
@@ -128,7 +129,7 @@ Bottom-of-funnel measurement linking ad exposure to downstream business outcomes
 
 ---
 
-## Conclusion: The Creative Layer is the Strategic Moat
+## Conclusion
 
 Across all three pillars, one theme emerges clearly: **creative is the highest-leverage variable in TikTok advertising.** Distribution and analytics are table stakes that all major ad platforms provide. What differentiates TikTok — and what represents the largest product opportunity — is reducing the creative barrier to entry for SMBs through AI.
 
